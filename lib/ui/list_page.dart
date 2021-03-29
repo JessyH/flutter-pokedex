@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
-import '../extensions/string_ext.dart';
-import '../model/pokemon.dart';
 import '../providers/base_provider.dart';
 import '../providers/list_provider.dart';
+import '../providers/list_item_provider.dart';
+import '../res/app_colors.dart';
+import '../res/app_strings.dart';
+import '../ui/list_item.dart';
 
 class ListPage extends StatefulWidget {
   @override
@@ -29,50 +31,37 @@ class _ListPageState extends State<ListPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pokedex'),
+        title: const Text(AppStrings.title),
       ),
       body: _listProvider.state == ProviderState.Success
-          ? _gridView(_listProvider.pokemons)
+          ? _gridView()
           : _progressIndicator(),
     );
   }
 
-  Widget _gridView(List<Pokemon> pokemons) {
-    return GridView.builder(
-      itemCount: pokemons.length,
-      gridDelegate:
-          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-      itemBuilder: (BuildContext context, int index) =>
-          _gridItem(pokemons[index]),
-    );
-  }
-
-  Widget _gridItem(Pokemon pokemon) {
-    return Card(
-      clipBehavior: Clip.antiAlias,
-      color: Colors.white,
-      child: InkWell(
-        enableFeedback: true,
-        child: Container(
-          child: Column(
-            children: [
-              Expanded(
-                flex: 9,
-                child: Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Image.network(
-                    pokemon.getImageUrl(),
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Text(pokemon.name.capitalize()),
-              ),
-            ],
-          ),
+  Widget _gridView() {
+    return RawScrollbar(
+      thickness: 4,
+      thumbColor: AppColors.primary,
+      isAlwaysShown: true,
+      child: GridView.builder(
+        itemCount: _listProvider.pokemons.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          mainAxisSpacing: 4,
+          crossAxisSpacing: 4,
         ),
-        onTap: () => _onGridItemTapped(pokemon),
+        padding: EdgeInsets.only(
+          top: 8,
+          right: 8,
+          left: 8,
+        ),
+        itemBuilder: (context, int index) {
+          return ChangeNotifierProvider.value(
+            value: ListItemProvider(_listProvider.pokemons[index]),
+            child: ListItem(key: ObjectKey(index)),
+          );
+        },
       ),
     );
   }
@@ -81,9 +70,5 @@ class _ListPageState extends State<ListPage> {
     return Center(
       child: CircularProgressIndicator(),
     );
-  }
-
-  void _onGridItemTapped(Pokemon pokemon) {
-    print('${pokemon.name} tapped!');
   }
 }
