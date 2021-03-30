@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
+import 'api_response.dart';
 import '../../model/pokemon.dart';
-import '../../model/pokemon_list_response.dart';
 
 class PokemonApiClient {
   static const _uriAuthority = 'pokeapi.co';
@@ -15,10 +15,10 @@ class PokemonApiClient {
 
   Future<List<Pokemon>> getFirstGeneration() async {
     final http.Response response = await _safeGet(
-      Uri.https(_uriAuthority, _uriPath, {'limit': '151'}),
+      Uri.https(_uriAuthority, _uriPath, {'limit': '1'}),
       'Failed to get the first generation of Pokemons',
     );
-    return PokemonListResponse(json.decode(response.body)).pokemons;
+    return ApiResponse.mapToList(json.decode(response.body));
   }
 
   Future<http.Response> _safeGet(Uri uri, String error) async {

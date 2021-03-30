@@ -1,13 +1,13 @@
-import '../model/pokemon.dart';
+import '../../model/pokemon.dart';
 
-class PokemonListResponse {
-  final List<Pokemon> pokemons = [];
-
-  PokemonListResponse(Map<String, dynamic> response) {
+class ApiResponse {
+  static List<Pokemon> mapToList(Map<String, dynamic> response) {
     try {
+      final List<Pokemon> pokemons = [];
       for (Map<String, dynamic> json in response['results']) {
         pokemons.add(Pokemon.fromJson(json));
       }
+      return pokemons;
     } catch (exception) {
       throw Exception('Invalid response: $exception');
     }
