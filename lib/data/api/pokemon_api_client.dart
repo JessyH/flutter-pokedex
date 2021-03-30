@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../model/pokemon.dart';
-import '../model/pokemon_list_response.dart';
+import '../../model/pokemon.dart';
+import '../../model/pokemon_list_response.dart';
 
 class PokemonApiClient {
   static const _uriAuthority = 'pokeapi.co';
@@ -11,7 +11,7 @@ class PokemonApiClient {
 
   final http.Client httpClient;
 
-  PokemonApiClient(this.httpClient);
+  PokemonApiClient({required this.httpClient});
 
   Future<List<Pokemon>> getFirstGeneration() async {
     final http.Response response = await _safeGet(

@@ -6,6 +6,7 @@ Pokedex is a **WIP** Flutter application for viewing the first generation of Pok
 * [Provider](https://github.com/rrousselGit/provider) for state management
 * [Cached Network Image](https://github.com/Baseflow/flutter_cached_network_image) for image loading/caching
 * [Palette Generator](https://github.com/flutter/packages) for colors extraction
+* [GetIt](https://github.com/fluttercommunity/get_it) for dependency injection
 
 ## Inspiration
 

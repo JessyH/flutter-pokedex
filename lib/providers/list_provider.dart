@@ -1,12 +1,12 @@
-import '../api/pokemon_repository.dart';
 import '../model/pokemon.dart';
 import '../providers/base_provider.dart';
+import '../repositories/pokemon_repository.dart';
 
 class ListProvider extends BaseProvider {
   final List<Pokemon> _pokemons = [];
   final PokemonRepository pokemonRepository;
 
-  ListProvider(this.pokemonRepository);
+  ListProvider({required this.pokemonRepository});
 
   List<Pokemon> get pokemons => _pokemons;
 
