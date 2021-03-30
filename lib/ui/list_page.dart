@@ -6,6 +6,7 @@ import '../providers/base_provider.dart';
 import '../providers/list_provider.dart';
 import '../res/app_colors.dart';
 import '../res/app_strings.dart';
+import '../ui/custom_progress_indicator.dart';
 import '../ui/list_item.dart';
 
 class ListPage extends StatefulWidget {
@@ -34,7 +35,7 @@ class _ListPageState extends State<ListPage> {
       ),
       body: _listProvider.state == ProviderState.Success
           ? _gridView()
-          : _progressIndicator(),
+          : CustomProgressIndicator(),
     );
   }
 
@@ -64,12 +65,6 @@ class _ListPageState extends State<ListPage> {
           );
         },
       ),
-    );
-  }
-
-  Widget _progressIndicator() {
-    return Center(
-      child: CircularProgressIndicator(),
     );
   }
 }

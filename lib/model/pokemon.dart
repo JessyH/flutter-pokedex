@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'pokemon_details.dart';
 import '../extensions/string_ext.dart';
 
 class Pokemon {
   late final int id;
   final String name;
   final String url;
+  PokemonDetails? details;
   Color dominantColor = defaultDominantColor;
 
   static const Color defaultDominantColor = Colors.white;

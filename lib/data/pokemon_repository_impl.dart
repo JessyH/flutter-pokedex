@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import 'api/pokemon_api_client.dart';
 import '../model/pokemon.dart';
+import '../model/pokemon_details.dart';
 import '../repositories/pokemon_repository.dart';
 import '../utils/color_extractor.dart';
 
@@ -12,8 +13,8 @@ class PokemonRepositoryImpl extends PokemonRepository {
   PokemonRepositoryImpl({required this.pokemonApiClient});
 
   @override
-  Future<Pokemon> getPokemonDetails(int id) async {
-    throw UnimplementedError();
+  Future<PokemonDetails> getPokemonDetails(int id) async {
+    return await pokemonApiClient.getDetails(id);
   }
 
   @override

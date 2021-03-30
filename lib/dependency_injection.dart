@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'data/api/pokemon_api_client.dart';
 import 'data/pokemon_repository_impl.dart';
 import 'providers/list_provider.dart';
+import 'providers/details_provider.dart';
 import 'repositories/pokemon_repository.dart';
 
 final getIt = GetIt.instance;
@@ -12,6 +13,9 @@ void setup() {
   // Providers
   getIt.registerFactory(
     () => ListProvider(pokemonRepository: getIt()),
+  );
+  getIt.registerFactory(
+    () => DetailsProvider(pokemonRepository: getIt()),
   );
 
   // Data

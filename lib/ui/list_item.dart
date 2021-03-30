@@ -1,9 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
+import 'details_page.dart';
+import '../dependency_injection.dart' as di;
 import '../extensions/string_ext.dart';
 import '../model/pokemon.dart';
+import '../providers/details_provider.dart';
 
 class ListItem extends StatelessWidget {
   final Pokemon pokemon;
@@ -43,7 +47,17 @@ class ListItem extends StatelessWidget {
             ],
           ),
         ),
-        onTap: () => print('${pokemon.name} tapped!'),
+        onTap: () => {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ChangeNotifierProvider(
+                create: (_) => di.getIt<DetailsProvider>()..init(pokemon),
+                child: DetailsPage(),
+              ),
+            ),
+          ),
+        },
       ),
     );
   }
