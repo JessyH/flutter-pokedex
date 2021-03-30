@@ -5,8 +5,8 @@ class PokemonListResponse {
 
   PokemonListResponse(Map<String, dynamic> response) {
     try {
-      for (int i = 0; i < response['results'].length; i++) {
-        pokemons.add(Pokemon.fromJson(response['results'][i]));
+      for (Map<String, dynamic> json in response['results']) {
+        pokemons.add(Pokemon.fromJson(json));
       }
     } catch (exception) {
       throw Exception('Invalid response: $exception');

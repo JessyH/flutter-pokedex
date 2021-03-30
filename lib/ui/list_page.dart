@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../providers/base_provider.dart';
 import '../providers/list_provider.dart';
-import '../providers/list_item_provider.dart';
 import '../res/app_colors.dart';
 import '../res/app_strings.dart';
 import '../ui/list_item.dart';
@@ -56,12 +55,10 @@ class _ListPageState extends State<ListPage> {
           right: 8,
           left: 8,
         ),
-        itemBuilder: (context, int index) {
-          return ChangeNotifierProvider.value(
-            value: ListItemProvider(_listProvider.pokemons[index]),
-            child: ListItem(key: ObjectKey(index)),
-          );
-        },
+        itemBuilder: (context, int index) => ListItem(
+          key: ObjectKey(index),
+          pokemon: _listProvider.pokemons[index],
+        ),
       ),
     );
   }
