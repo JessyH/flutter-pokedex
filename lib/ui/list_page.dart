@@ -42,23 +42,27 @@ class _ListPageState extends State<ListPage> {
     return RawScrollbar(
       thickness: 4,
       thumbColor: AppColors.primary,
-      isAlwaysShown: true,
-      child: GridView.builder(
-        itemCount: _listProvider.pokemons.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: 4,
-          crossAxisSpacing: 4,
-        ),
-        padding: EdgeInsets.only(
-          top: 8,
-          right: 8,
-          left: 8,
-        ),
-        itemBuilder: (context, int index) => ListItem(
-          key: ObjectKey(index),
-          pokemon: _listProvider.pokemons[index],
-        ),
+      child: OrientationBuilder(
+        builder: (context, orientation) {
+          final itemsPerRow = orientation == Orientation.portrait ? 2 : 4;
+          return GridView.builder(
+            itemCount: _listProvider.pokemons.length,
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: itemsPerRow,
+              mainAxisSpacing: 4,
+              crossAxisSpacing: 4,
+            ),
+            padding: EdgeInsets.only(
+              top: 8,
+              right: 8,
+              left: 8,
+            ),
+            itemBuilder: (context, int index) => ListItem(
+              key: ObjectKey(index),
+              pokemon: _listProvider.pokemons[index],
+            ),
+          );
+        },
       ),
     );
   }

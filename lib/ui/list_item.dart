@@ -32,7 +32,13 @@ class ListItem extends StatelessWidget {
               ),
               Expanded(
                 flex: 1,
-                child: Text(pokemon.name.capitalize()),
+                child: Text(
+                  pokemon.name.capitalize(),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
               ),
             ],
           ),

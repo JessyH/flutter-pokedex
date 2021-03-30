@@ -15,7 +15,7 @@ class PokemonApiClient {
 
   Future<List<Pokemon>> getFirstGeneration() async {
     final http.Response response = await _safeGet(
-      Uri.https(_uriAuthority, _uriPath, {'limit': '1'}),
+      Uri.https(_uriAuthority, _uriPath, {'limit': '8'}),
       'Failed to get the first generation of Pokemons',
     );
     return ApiResponse.mapToList(json.decode(response.body));
